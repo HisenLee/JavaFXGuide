@@ -1,0 +1,119 @@
+1.JFoenix 是以JavaFX为基础写的符合谷歌Material Design设计的组件，可以写出很完美的远超AWT/Swing的J2SE效果。
+Github参考：https://github.com/jfoenixadmin/JFoenix
+
+2.需要下载并安装JDK8+  和 JavaFX Scene Builder(https://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html)
+
+3.JFoenix基础使用可以参考https://ice1000.org/2016/06/25/MDOnDesktop/
+
+4.JavaFX的使用可以参考 http://www.javafxchina.net/blog/docs/tutorial1/
+
+5.创建JavaFX项目只需要在IntelliJ中直接新建JavaFX项目即可。
+
+6.JavaFX应用程序的主类需要继承自javafx.application.Application
+
+7.JavaFX将UI容器定义为舞台(Stage)与场景(Scene)
+
+8.Stage类是JavaFX顶级容器；Scene类是所有内容的容器；
+
+9.start()方法是所有JavaFX应用程序的入口
+
+10.给Btn添加事件处理
+	btn.setOnAction(new EventHandler<ActionEvent>() {
+		@Override
+		public void handle(ActionEvent event) {
+			System.out.println("Hello World");
+		}
+	});
+
+11. a.给Scene添加css样式
+		Scene scene = new Scene(gridPane, 300, 275);
+		primaryStage.setScene(scene);
+		scene.getStylesheets().add(Main.class.getResource("login.css").toExternalForm());
+	b.[Javafx中的样式可以参考https://docs.oracle.com/javase/8/javafx/api/javafx/scene/doc-files/cssref.html]
+	c.标签样式
+		.root {
+			-fx-background-color: aqua;
+		}
+		.label {
+			-fx-font-size: 12px;
+			-fx-font-weight: bold;
+			-fx-text-fill: #333333;
+		}
+	d.ID样式，需要在代码中先设置ID
+		sceneTitle.setId("Login-text");
+		#Login-text {
+			-fx-font-size: 32px;
+			-fx-font-family: “Arial Black”;
+			-fx-fill: #818181;
+			-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+		}
+
+12.使用fxml写界面，达到界面设计和业务逻辑分离[类似于Android的布局文件,也可以使用JavaFX SceneBuilder拖动实现]
+    a.在start中加载FXML文件[界面修改只需要修改fxml文件]，类似于用代码创建pane.
+	b.再把fxml文件设置给scene，类似于把pane设置给scene
+	c.最后把scene设置给stage并显示即可。
+		Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+		primaryStage.setTitle("Hello World");
+		Scene scene = new Scene(root, 300, 275);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	d.在fxml中使用css
+		<stylesheets>
+        <URL value="@/resources/login.css"/>
+		</stylesheets>
+	e.在Controller中处理事件即可
+	
+13.Canvas和	GraphicsContext对象可以绘制基本图形和复杂的贝塞尔曲线等图形
+
+14.JavaFX提供的基本组件[使用的时候再查即可，都很简单]
+	14_1.Label(文本标签，支持换行，设置图标，旋转等)
+	14_2.Button (普通按钮，支持带文本，带图标，带阴影等)
+	14_3.RadioButton(单选按钮，支持文本，图像等)
+	14_4.ToggleButton(开关按钮，与Group使用来实现Tab切换效果)
+	14_5.CheckBox(复选框)
+	14_6.TextField(文本输入域)
+	14_7.PasswordField(密码输入域)
+	14_8.ScrollBar(滚动条)
+	14_9.ScrollPane(滚动面板)
+	14_10.ListView(列表视图,可以支持横向和纵向)
+	14_11.TableView(表格视图，可以用对象实例来填充表格数据)
+	14_12.TreeView(树视图)
+	14_13.TreeTableView(树表视图)
+	14_14.ComboBox(组合框，下拉列表)和ChoiceBox(选择框，下拉列表)都可以实现下拉列表
+	14_15.Separator(分隔符，可以给界面上添加横向或纵向的分割线)
+	14_16.Slider(滑动条)
+	14_17.ProgressBar(进度条)
+	14_18.Hyperlink(超链接)
+	14_19.HTMLEditor(HTML富文本编辑器)
+	14_20.Tooltip(提示框，类似Toast的效果)
+	14_21.TitledPane(标题面板)和Accordion(可折叠面板)
+	14_22.Menu(菜单)和MenuBar(菜单栏)
+	14_23.ColorPicker(颜色选择器)
+	14_24.DatePicker(日期选择器)
+	14_25.Pagination(分页控件)
+	14_26.FileChooser(文件选择器)
+	14_27.可以通过css样式来改变任何控件的外观
+
+15.图表控件[也支持使用css来改变外观]
+	PieChart, LineChart, AreaChart, BubbleChart, ScatterChart, BarChart	
+	
+16.WebView和WebEngine控件可以嵌入网页，并且实现js和javaFX交互。
+
+17.JavaFX中的面板Pane[面板之间可以相互嵌套,也可以给每个面板添加不同的css样式]
+	a.BorderPane边框面板(分为上下左右中五个部分，没有的部分会被其余挤压铺开)
+	b.HBox水平盒子面板
+	c.VBox垂直盒子面板
+	d.StackPane堆栈面板(后添加的控件会覆盖到前一个控件上)
+	e.GridPane网格面板
+	f.FlowPane流式面板
+	g.TilePane磁贴面板[有点像流式面板]
+	h.AnchorPane锚点面板
+	
+18.引入fxml布局文件
+	Pane myPane = (Pane)FXMLLoader.load(getClass().getResource
+    ("fxml_tableview.fxml"));
+    Scene myScene = new Scene(myPane);	
+	
+19.JavaFX可以和Java Swing相互嵌套和交互，再加上css，以弥补各自的不足	
+	
+	
