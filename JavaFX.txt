@@ -8,6 +8,18 @@ Github参考：https://github.com/jfoenixadmin/JFoenix
 4.JavaFX的使用可以参考 http://www.javafxchina.net/blog/docs/tutorial1/
 
 5.创建JavaFX项目只需要在IntelliJ中直接新建JavaFX项目即可。
+  其实完全可以用Maven来创建和管理FX项目。
+ * 0.创建Maven项目
+ * 1.修改主类继承自Application 并实现start方法
+ * 2.在File->Project Structure 中创建resources/css;fonts;fxml资源文件夹
+ * 3.在pom.xml中添加jfoenix的依赖以及如果项目用到其他的依赖包
+ * 4.编写对应的Main.java以及创建实现final MainController和fxml文件即可
+ * 5.编写Controller的作用是，用java注射机制来映射fxml以及fxml中的UI组件(MVC中的C)
+ * 6.编写fxml中也要引入fx:controller="..Controller"(fxml是MVC中的V)
+ * 7.DataFX库可以做model或者是数据交互层
+ * 8.DataFX 是一个通过 JavaFX UI 控件可轻松对数据进行获取、消息传递、填充、浏览和编辑的组件。
+DataFX支持的数据格式[数据源]包括:CSV,JavaArrays,JavaBeans,JDBC,JSON,XML,RedFX等
+		
 
 6.JavaFX应用程序的主类需要继承自javafx.application.Application
 
